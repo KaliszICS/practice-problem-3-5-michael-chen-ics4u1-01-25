@@ -25,7 +25,6 @@ public class PracticeProblem {
 	}
 
 	public static int noOfPaths(String[][] maze) {
-		boolean[][] visited = new boolean[maze.length][maze[0].length];
 		int dx = 0;
 		int dy = 0;
 		for (int i = 0; i < maze.length; i++) {
