@@ -13,7 +13,7 @@ class Notes {
 		//keep track of number of moves
 		int noOfMoves = 0;
 
-		dfsHelper(arr, curRow, curCol, noOfMoves);
+		return dfsHelper(arr, curRow, curCol, noOfMoves);
 		
 	}
 
@@ -31,7 +31,7 @@ class Notes {
 
 
 		//return the minimum steps (up and right)
-		
+		return 0;
 		
 		
 		
