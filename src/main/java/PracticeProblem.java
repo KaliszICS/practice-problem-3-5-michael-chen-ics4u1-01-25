@@ -42,6 +42,7 @@ public class PracticeProblem {
 	    }
 	    
 	    moves++;
+		maze[row][col] += moves;
 	    int movesRight = dfsHelper(maze, row, col + 1, moves);
 	    int movesUp = dfsHelper(maze, row - 1, col, moves);
 	    
@@ -72,9 +73,7 @@ public class PracticeProblem {
 		return paths[0];
 	}
 
-	public static void pathsHelper(String[][] maze, int row, int column, int depth, int dx, int dy, int[] paths) {
-		System.out.println(maze[dy][dx] + " - " + maze[row][column]);
-		
+	public static void pathsHelper(String[][] maze, int row, int column, int depth, int dx, int dy, int[] paths) {		
 		if (maze[dy][dx] == maze[row][column]) {
 			paths[0]++;
 		}
