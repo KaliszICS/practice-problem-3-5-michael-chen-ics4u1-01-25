@@ -1,7 +1,7 @@
 public class PracticeProblem {
 
 	public static void main(String args[]) {
-		System.out.println(noOfPaths(new String[][]{{"7", "8", "F"}, {"4", "5", "6"}, {"S", "2", "3"}}));
+		System.out.println(searchMazeMoves(new String[][]{{"", "", "F"}, {"", "", ""}, {"S", "", ""}}));
 	}
 
 	// public static int searchMazeMoves(String[][] maze) {
@@ -40,17 +40,29 @@ public class PracticeProblem {
 	    if (maze[row][col] == "F") {
 	        return moves;
 	    }
+
+		if (maze[row][col] != "" && maze[row][col] != "S") {
+			return Integer.parseInt(maze[row][col]);
+		}
 	    
 	    moves++;
-		maze[row][col] += moves;
 	    int movesRight = dfsHelper(maze, row, col + 1, moves);
 	    int movesUp = dfsHelper(maze, row - 1, col, moves);
 	    
 	    if (movesRight == -1) {
+			if (maze[row][col] != "S") {
+				maze[row][col] = Integer.toString(movesUp);
+			}
 	        return movesUp;
 	    } else if (movesUp == -1) {
-	        return movesRight;
+			if (maze[row][col] != "S") {
+				maze[row][col] = Integer.toString(movesRight);
+			}
+			return movesRight;
 	    } else {
+			if (maze[row][col] != "S") {
+				maze[row][col] = Integer.toString(Math.min(movesUp, movesRight));
+			}
 	        return Math.min(movesUp, movesRight);
 	    }
 	}
