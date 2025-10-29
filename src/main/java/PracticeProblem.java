@@ -4,24 +4,54 @@ public class PracticeProblem {
 		System.out.println(noOfPaths(new String[][]{{"7", "8", "F"}, {"4", "5", "6"}, {"S", "2", "3"}}));
 	}
 
-	public static int searchMazeMoves(String[][] maze) {
-		int row = maze.length - 1;
+	// public static int searchMazeMoves(String[][] maze) {
+	// 	int row = maze.length - 1;
 
-		return mazeHelper(maze, row, 0) - 1;
+	// 	return mazeHelper(maze, row, 0) - 1;
+	// }
+
+	// public static int mazeHelper(String[][] maze, int row, int moves) {
+	// 	if (row < 0) {
+	// 		return -1;
+	// 	}
+
+	// 	for (int i = 0; i < maze[0].length; i++) {
+	// 		if (maze[row][i] == "F") {
+	// 			return ((maze.length - 1) - row) + i + 1;
+	// 		}
+	// 	}
+
+	// 	return mazeHelper(maze, row - 1, moves);
+	// }
+
+	public static int searchMazeMoves (String[][] maze) {
+	    int moves = 0;
+	    int row = maze.length - 1;
+	    int col = 0;
+	    
+	    return dfsHelper (maze, row, col, moves);
 	}
-
-	public static int mazeHelper(String[][] maze, int row, int moves) {
-		if (row < 0) {
-			return -1;
-		}
-
-		for (int i = 0; i < maze[0].length; i++) {
-			if (maze[row][i] == "F") {
-				return ((maze.length - 1) - row) + i + 1;
-			}
-		}
-
-		return mazeHelper(maze, row - 1, moves);
+	
+	public static int dfsHelper (String[][] maze, int row, int col, int moves) {
+	    if (row < 0 || col >= maze[0].length) {
+	        return -1;
+	    }
+	    
+	    if (maze[row][col] == "F") {
+	        return moves;
+	    }
+	    
+	    moves++;
+	    int movesRight = dfsHelper(maze, row, col + 1, moves);
+	    int movesUp = dfsHelper(maze, row - 1, col, moves);
+	    
+	    if (movesRight == -1) {
+	        return movesUp;
+	    } else if (movesUp == -1) {
+	        return movesRight;
+	    } else {
+	        return Math.min(movesUp, movesRight);
+	    }
 	}
 
 	public static int noOfPaths(String[][] maze) {
